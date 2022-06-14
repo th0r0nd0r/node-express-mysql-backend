@@ -1,0 +1,11 @@
+{
+  "name": "express-mysql-backend",
+  "version": "1.0.0",
+  "description": "a basic backend setup with node/express/mysql",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "sac lourd",
+  "license": "ISC"
+}
