@@ -4,7 +4,8 @@
   "description": "a basic backend setup with node/express/mysql",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "dev": "node -r dotenv/config server.js"
   },
   "author": "sac lourd",
   "license": "ISC",
