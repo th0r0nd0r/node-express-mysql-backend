@@ -1,5 +1,6 @@
-const express = require("express");
-const cors = require("cors");
+// using import instead of require by setting "type": "module" in package.json
+import express from 'express';
+import cors from 'cors';
 // const router = require("./routes");
 // const AppError = require("./utils/appError");
 // const errorHandler = require("./utils/errorHandler");
