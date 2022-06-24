@@ -25,13 +25,18 @@ app.get('/', (req, res) => {
 });
 
 // connect to db + start the server
-database
-  .connect()
-  .then(() =>
-    app.listen(port, () =>
-      console.log(`Server started, listening port: ${port}`)
-    )
-  )
-  .catch((err) => console.log(err));
+
+async function testDatabaseConnection() {
+  try {
+    await database.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
+
+testDatabaseConnection();
+
+app.listen(port, () => console.log(`Server started, listening port: ${port}`));
 
 // TODO: cache static files for production https://expressjs.com/en/advanced/best-practice-performance.html#use-a-reverse-proxy
