@@ -1,7 +1,7 @@
 // using import instead of require by setting "type": "module" in package.json
 import express from 'express';
 import cors from 'cors';
-import database from './setup/database';
+import database from './setup/database.js';
 // const router = require("./routes");
 // const AppError = require("./utils/appError");
 // const errorHandler = require("./utils/errorHandler");

@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize';
+import Sequelize from 'sequelize';
 
 const {
   PORT: port,
@@ -10,9 +10,10 @@ const {
 } = process.env;
 
 export default {
-  connect: () => new Sequelize(database_name, username, password, {
-    port,
-    host,
-    dialect,
-  }),
-}
+  connect: () =>
+    new Sequelize(database_name, username, password, {
+      port,
+      host,
+      dialect,
+    }),
+};
