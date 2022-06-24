@@ -1,0 +1,10 @@
+{
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error", {"singleQuote": true}]
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020
+}
+}
