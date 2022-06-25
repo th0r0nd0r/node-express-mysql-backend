@@ -16,6 +16,12 @@ const database = new Sequelize(database_name, username, password, {
 });
 
 // setting force: true wipes db
-database.sync({ force: false });
+database
+  .sync({ force: false })
+  .then(() => console.log('database synced'))
+  .catch((err) => {
+    console.log(`database sync failed with error: ${err}`);
+    throw err;
+  });
 
 export default database;
