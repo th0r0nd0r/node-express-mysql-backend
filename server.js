@@ -41,5 +41,3 @@ async function testDatabaseConnection() {
 testDatabaseConnection();
 
 app.listen(port, () => console.log(`Server started, listening port: ${port}`));
-
-// TODO: cache static files for production https://expressjs.com/en/advanced/best-practice-performance.html#use-a-reverse-proxy
