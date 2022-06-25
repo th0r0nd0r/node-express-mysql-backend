@@ -10,7 +10,7 @@ import database from './setup/database.js';
 const app = express();
 const port = process.env.PORT;
 
-// apply middleware
+// Middleware
 
 // CORS config. Allowing only metro bundler for now
 const corsOptions = {
@@ -21,6 +21,13 @@ app.use(cors(corsOptions));
 app.use(express.json());
 // sets the default dir from which to serve static assets
 app.use(express.static('public'));
+// converts form data to JSON?
+app.use(
+  express.urlencoded({
+    extended: false,
+    limit: '64mb',
+  })
+);
 
 // defining basic routes
 app.get('/', (req, res) => {
