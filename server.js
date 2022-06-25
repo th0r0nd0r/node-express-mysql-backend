@@ -12,8 +12,11 @@ const port = process.env.PORT;
 
 // apply middleware
 
-// CORS config
-app.use(cors());
+// CORS config. Allowing only metro bundler for now
+const corsOptions = {
+  origin: 'https://localhost:8081',
+};
+app.use(cors(corsOptions));
 // JSON parsing
 app.use(express.json());
 // sets the default dir from which to serve static assets
