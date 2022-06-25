@@ -5,9 +5,9 @@ import Spot from './Spot.js';
 import User from './User.js';
 
 export default {
-  BuoyData,
-  Forecast,
-  Session,
-  Spot,
-  User,
+  BuoyDataModel: BuoyData,
+  ForecastModel: Forecast,
+  SessionModel: Session,
+  SpotModel: Spot,
+  UserModel: User,
 };
