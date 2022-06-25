@@ -9,8 +9,13 @@ const {
   MYSQL_PASSWORD: password,
 } = process.env;
 
-export default new Sequelize(database_name, username, password, {
+const database = new Sequelize(database_name, username, password, {
   port,
   host,
   dialect,
 });
+
+// setting force: true wipes db
+database.sync({ force: false });
+
+export default database;
