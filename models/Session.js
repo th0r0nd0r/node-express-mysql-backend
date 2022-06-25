@@ -12,18 +12,48 @@ export default Session = database.define('session', {
     },
     rating: {
       type: Sequelize.INTEGER,
+      validate: {
+        min: 1,
+        max: 10,
+      },
+    },
+    time: {
+      type: Sequelize.DATE,
+    },
+    length: {
+      type: Sequelize.FLOAT,
+      validate: {
+        min: 0,
+        max: 24,
+      },
     },
     swellRating: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 1,
+        max: 10,
+      },
     },
     windRating: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 1,
+        max: 10,
+      },
     },
     tideRating: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 1,
+        max: 10,
+      },
     },
     crowdRating: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 1,
+        max: 10,
+      },
     },
     waveHeight: {
 
