@@ -9,6 +9,7 @@ const forecastSources = [
   'metservice',
   'stormsurf',
 ];
+const tidePhases = [ 'low', 'high', 'mid-rising', 'mid-falling' ];
 
 export default Session = database.define('session', {
   notes: {
@@ -113,6 +114,21 @@ export default Session = database.define('session', {
       validate: {
         min: 0,
         max: 359,
+      },
+    },
+    // feet for now
+    forecastTideHeight: {
+      type: Sequelize.FLOAT,
+      validate: {
+        min: -20,
+        max: 60,
+      },
+    },
+    forecastTidePhase: {
+      type: Sequelize.STRING,
+      validate: {
+        isIn: [tidePhases],
+        msg: 'Unrecognized tide phase',
       },
     },
     forecastSource: {
