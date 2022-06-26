@@ -1,6 +1,15 @@
 import Sequelize from 'sequelize';
 import database from '../setup/database';
 
+const forecastSources = [
+  'magicseaweed',
+  'surfline',
+  'buoy',
+  'surf-forecast',
+  'metservice',
+  'stormsurf',
+];
+
 export default Session = database.define('session', {
   notes: {
     type: Sequelize.TEXT,
@@ -55,27 +64,63 @@ export default Session = database.define('session', {
         max: 10,
       },
     },
+    // defaulting to feet for now
     waveHeight: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0,
+        max: 150,
+      },
     },
     forecastWaveHeight: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0,
+        max: 150,
+      },
     },
     forecastSwellHeight: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0,
+        max: 150,
+      },
     },
     forecastSwellPeriod: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0,
+        max: 30,
+      },
     },
     forecastSwellAngle: {
-
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0,
+        max: 359,
+      },
     },
-    forecastWind: {
-
+    // defaulting to mph for now
+    forecastWindStrength: {
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0,
+        max: 200,
+      },
+    },
+    forecastWindAngle: {
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0,
+        max: 359,
+      },
     },
     forecastSource: {
-
+      type: Sequelize.STRING,
+      validate: {
+        isIn: [forecastSources],
+        msg: 'Unrecognized forecast source',
+      },
     },
-
   },
 });
