@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import database from '../setup/database';
+import database from '../setup/database.js';
 
 const forecastSources = [
   'magicseaweed',
@@ -11,7 +11,7 @@ const forecastSources = [
 ];
 const tidePhases = ['low', 'high', 'mid-rising', 'mid-falling'];
 
-export default Session = database.define('session', {
+const Session = database.define('session', {
   notes: {
     type: Sequelize.TEXT,
     validate: {
@@ -142,3 +142,5 @@ export default Session = database.define('session', {
     },
   },
 });
+
+export default Session;

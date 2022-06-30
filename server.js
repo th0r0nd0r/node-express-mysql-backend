@@ -1,7 +1,8 @@
 // using import instead of require by setting "type": "module" in package.json
 import express from 'express';
 import cors from 'cors';
-import database from './setup/database.js';
+import database, { initialize } from './setup/database.js';
+import initializeDatabase from './setup/models.js';
 import setUpRoutes from './setup/routes.js';
 // const router = require("./routes");
 // const AppError = require("./utils/appError");
@@ -32,18 +33,22 @@ app.use(
 // adds all route modules to app
 setUpRoutes(app);
 
+// sets up models + associations and syncs the db
+initializeDatabase().then(() => {
+  app.listen(port, () =>
+    console.log(`Server started, listening port: ${port}`)
+  );
+});
 
 // connect to db + start the server
 
-async function testDatabaseConnection() {
-  try {
-    await database.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
+// async function testDatabaseConnection() {
+//   try {
+//     await database.authenticate();
+//     console.log('Connection has been established successfully.');
+//   } catch (error) {
+//     console.error('Unable to connect to the database:', error);
+//   }
+// }
 
-testDatabaseConnection();
-
-app.listen(port, () => console.log(`Server started, listening port: ${port}`));
+// testDatabaseConnection();

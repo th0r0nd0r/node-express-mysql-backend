@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
-import database from '../setup/database';
+import database from '../setup/database.js';
 
-export default Spot = database.define('spot', {
+const Spot = database.define('spot', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -36,3 +36,5 @@ export default Spot = database.define('spot', {
     },
   },
 });
+
+export default Spot;

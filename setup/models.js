@@ -1,4 +1,6 @@
-import { BuoyData, Forecast, Session, Spot, User } from '../models.js';
+import models from '../models/index.js';
+const { Session, Spot, User } = models;
+import { initialize as initializeDatabase } from './database.js';
 
 // User
 
@@ -12,3 +14,5 @@ Session.belongsTo(Spot);
 // Spot
 
 Spot.hasMany(Session, { foreignKey: { allowNull: false } });
+
+export default initializeDatabase;

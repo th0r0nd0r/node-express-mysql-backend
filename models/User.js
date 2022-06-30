@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
-import database from '../setup/database';
+import database from '../setup/database.js';
 
-export default User = database.define('user', {
+const User = database.define('user', {
   username: {
     type: Sequelize.STRING,
     validate: {
@@ -35,3 +35,5 @@ export default User = database.define('user', {
     },
   },
 });
+
+export default User;
