@@ -5,6 +5,9 @@ const Spot = database.define('spot', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    set(name) {
+      this.setDataValue('name', name.trim());
+    },
   },
   location: {
     type: Sequelize.GEOMETRY('POINT', 4236),

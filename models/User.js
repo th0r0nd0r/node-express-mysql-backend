@@ -11,6 +11,9 @@ const User = database.define('user', {
         msg: 'Usernames must be between 4 and 15 characters',
       },
     },
+    set(username) {
+      this.setDataValue('username', username.trim());
+    },
   },
   email: {
     type: Sequelize.STRING,
@@ -26,6 +29,9 @@ const User = database.define('user', {
       isEmail: {
         msg: 'Please provide a valid email address',
       },
+    },
+    set(email) {
+      this.setDataValue('email', email.trim());
     },
   },
   password: {

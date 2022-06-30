@@ -18,4 +18,11 @@ router.post('/', (req, res, next) => {
     username: Joi.string().max(15).required(),
     email: Joi.string().email().required(),
   });
+
+  const reqError = reqSchema.validate(body).error;
+  if (reqError) {
+    return res.status(400).json(reqError.message);
+  }
+
+
 });
