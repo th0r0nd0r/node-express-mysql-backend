@@ -26,12 +26,11 @@ router.post('/', (req, res, next) => {
   if (reqError) {
     return res.status(400).json(reqError.message);
   }
-  
+
   const { username, email, password, confirmPassword } = body;
 
   UserModel.findOne({ where: { [Op.or]: [{ email, username }] } }).then(
     (user) => {
-
       if (user) {
         // TODO:
         // if (user.email === body.email && hash(body.password) !== user.password)
@@ -43,10 +42,19 @@ router.post('/', (req, res, next) => {
           return res.status(409).json('Username already exists');
         }
       } else {
-
         if (password !== confirmPassword) {
           return res.status(400).json('Passwords do not match');
         }
+
+        UserModel.create({ username, email, password }).then((newUser) => {
+          const { id, username, email } = newUser;
+          const resp = { id, username, email };
+
+          const { value, error } = Joi.validate(resp, respSchema);
+          if (error) return res.status(500).json(error);
+
+          return res.status(201).json(value);
+        });
       }
     }
   );
