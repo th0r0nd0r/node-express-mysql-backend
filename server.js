@@ -30,9 +30,7 @@ app.use(
 );
 
 // defining basic routes
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+
 
 // connect to db + start the server
 
