@@ -4,6 +4,7 @@ import database from '../setup/database.js';
 const User = database.define('user', {
   username: {
     type: Sequelize.STRING,
+    allowNull: false,
     validate: {
       len: {
         args: [4, 15],
@@ -13,6 +14,7 @@ const User = database.define('user', {
   },
   email: {
     type: Sequelize.STRING,
+    allowNull: false,
     unique: {
       msg: 'Incorrect email and password combination',
     },
@@ -28,6 +30,7 @@ const User = database.define('user', {
   },
   password: {
     type: Sequelize.STRING.BINARY,
+    allowNull: false,
     validate: {
       len: {
         args: [0, 60],
