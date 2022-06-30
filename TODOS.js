@@ -1,3 +1,20 @@
+// Setting up the Backend
+// - set up User model
+// - make sure models are instantiated + tables look as they should
+// - define what routes will be used
+// - create routes
+// - make controllers for each route
+//   - parse incoming requests
+//   - format appropriate DB write/read
+//   - perform action on DB
+//   - format response
+//   - send response
+// - figure out basic security for routes
+// - implement auth
+
+
+
+
 // Pre - production deployment
 // - add authentication
 // - reconfigure CORS once app is deployed
@@ -8,3 +25,4 @@
 // Features
 // - add ability to share sessions / spots with specific users
 // - ability to add photos to sessions + spots
+// - create database if not exists

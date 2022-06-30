@@ -9,7 +9,7 @@ const forecastSources = [
   'metservice',
   'stormsurf',
 ];
-const tidePhases = [ 'low', 'high', 'mid-rising', 'mid-falling' ];
+const tidePhases = ['low', 'high', 'mid-rising', 'mid-falling'];
 
 export default Session = database.define('session', {
   notes: {

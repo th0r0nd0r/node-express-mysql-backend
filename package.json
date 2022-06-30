@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "test",
-    "dev": "node -r dotenv/config server.js"
+    "dev": "nodemon -r dotenv/config server.js"
   },
   "author": "sac lourd",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "eslint-plugin-n": "^15.2.3",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.18",
     "prettier": "2.7.1"
   }
 }
