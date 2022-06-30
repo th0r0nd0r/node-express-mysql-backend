@@ -27,9 +27,11 @@ export default Session = database.define('session', {
         max: 10,
       },
     },
+    // when the session began
     time: {
       type: Sequelize.DATE,
     },
+    // session length, in hours
     length: {
       type: Sequelize.FLOAT,
       validate: {

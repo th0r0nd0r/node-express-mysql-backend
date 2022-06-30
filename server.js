@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 import database from './setup/database.js';
+import setUpRoutes from './setup/routes.js';
 // const router = require("./routes");
 // const AppError = require("./utils/appError");
 // const errorHandler = require("./utils/errorHandler");
@@ -28,8 +29,8 @@ app.use(
     limit: '64mb',
   })
 );
-
-// defining basic routes
+// adds all route modules to app
+setUpRoutes(app);
 
 
 // connect to db + start the server
