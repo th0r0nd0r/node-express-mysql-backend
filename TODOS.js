@@ -1,4 +1,5 @@
 // Setting up the Backend
+// - fix missing columns in Session model
 // - set up User model
 // - make sure models are instantiated + tables look as they should
 // - define what routes will be used

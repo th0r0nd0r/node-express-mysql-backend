@@ -54,11 +54,11 @@ router.post('/', (req, res, next) => {
         //    redirect to login page
 
         if (username === user.username) {
-          return res.status(409).json({ error: 'Username already exists' });
+          return res.status(409).json('Username already exists');
         }
 
         if (email === user.email) {
-          return res.status(409).json({ error: 'Email already exists' });
+          return res.status(409).json('Email already exists');
         }
       } else {
         UserModel.create({ username, email, password }).then((newUser) => {
