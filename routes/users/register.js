@@ -26,9 +26,7 @@ router.post('/', (req, res, next) => {
       .error(passwordError)
       .required(),
     confirmPassword: Joi.string()
-      .min(8)
-      .max(60)
-      .ref('password')
+      .valid(Joi.ref('password'))
       .error(confirmPasswordError)
       .required(),
   });
@@ -46,7 +44,7 @@ router.post('/', (req, res, next) => {
 
   const { username, email, password, confirmPassword } = body;
 
-  UserModel.findOne({ where: { [Op.or]: [{ email, username }] } }).then(
+  UserModel.findOne({ where: { [Op.or]: [{ email }, { username }] } }).then(
     (user) => {
       if (user) {
         // TODO:
@@ -56,18 +54,18 @@ router.post('/', (req, res, next) => {
         //    redirect to login page
 
         if (username === user.username) {
-          return res.status(409).json('Username already exists');
-        }
-      } else {
-        if (password !== confirmPassword) {
-          return res.status(400).json('Passwords do not match');
+          return res.status(409).json({ error: 'Username already exists' });
         }
 
+        if (email === user.email) {
+          return res.status(409).json({ error: 'Email already exists' });
+        }
+      } else {
         UserModel.create({ username, email, password }).then((newUser) => {
           const { id, username, email } = newUser;
           const resp = { id, username, email };
 
-          const { value, error } = Joi.validate(resp, respSchema);
+          const { value, error } = respSchema.validate(resp);
           if (error) return res.status(500).json(error);
 
           return res.status(201).json(value);
@@ -76,3 +74,5 @@ router.post('/', (req, res, next) => {
     }
   );
 });
+
+export default router;
