@@ -20,125 +20,125 @@ const Session = database.define('session', {
         msg: 'Notes cannot exceed 10,000 characters',
       },
     },
-    rating: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 1,
-        max: 10,
-      },
+  },
+  rating: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 10,
     },
-    // when the session began
-    time: {
-      type: Sequelize.DATE,
+  },
+  // when the session began
+  time: {
+    type: Sequelize.DATE,
+  },
+  // session length, in hours
+  length: {
+    type: Sequelize.FLOAT,
+    validate: {
+      min: 0,
+      max: 24,
     },
-    // session length, in hours
-    length: {
-      type: Sequelize.FLOAT,
-      validate: {
-        min: 0,
-        max: 24,
-      },
+  },
+  swellRating: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 10,
     },
-    swellRating: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 1,
-        max: 10,
-      },
+  },
+  windRating: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 10,
     },
-    windRating: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 1,
-        max: 10,
-      },
+  },
+  tideRating: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 10,
     },
-    tideRating: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 1,
-        max: 10,
-      },
+  },
+  crowdRating: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 1,
+      max: 10,
     },
-    crowdRating: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 1,
-        max: 10,
-      },
+  },
+  // defaulting to feet for now
+  waveHeight: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0,
+      max: 150,
     },
-    // defaulting to feet for now
-    waveHeight: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 0,
-        max: 150,
-      },
+  },
+  forecastWaveHeight: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0,
+      max: 150,
     },
-    forecastWaveHeight: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 0,
-        max: 150,
-      },
+  },
+  forecastSwellHeight: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0,
+      max: 150,
     },
-    forecastSwellHeight: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 0,
-        max: 150,
-      },
+  },
+  forecastSwellPeriod: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0,
+      max: 30,
     },
-    forecastSwellPeriod: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 0,
-        max: 30,
-      },
+  },
+  forecastSwellAngle: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0,
+      max: 359,
     },
-    forecastSwellAngle: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 0,
-        max: 359,
-      },
+  },
+  // defaulting to mph for now
+  forecastWindStrength: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0,
+      max: 200,
     },
-    // defaulting to mph for now
-    forecastWindStrength: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 0,
-        max: 200,
-      },
+  },
+  forecastWindAngle: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0,
+      max: 359,
     },
-    forecastWindAngle: {
-      type: Sequelize.INTEGER,
-      validate: {
-        min: 0,
-        max: 359,
-      },
+  },
+  // feet for now
+  forecastTideHeight: {
+    type: Sequelize.FLOAT,
+    validate: {
+      min: -20,
+      max: 60,
     },
-    // feet for now
-    forecastTideHeight: {
-      type: Sequelize.FLOAT,
-      validate: {
-        min: -20,
-        max: 60,
-      },
+  },
+  forecastTidePhase: {
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [tidePhases],
+      msg: 'Unrecognized tide phase',
     },
-    forecastTidePhase: {
-      type: Sequelize.STRING,
-      validate: {
-        isIn: [tidePhases],
-        msg: 'Unrecognized tide phase',
-      },
-    },
-    forecastSource: {
-      type: Sequelize.STRING,
-      validate: {
-        isIn: [forecastSources],
-        msg: 'Unrecognized forecast source',
-      },
+  },
+  forecastSource: {
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [forecastSources],
+      msg: 'Unrecognized forecast source',
     },
   },
 });
