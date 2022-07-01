@@ -5,6 +5,9 @@ const User = database.define('user', {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: {
+      msg: 'Username already exists',
+    },
     validate: {
       len: {
         args: [4, 15],

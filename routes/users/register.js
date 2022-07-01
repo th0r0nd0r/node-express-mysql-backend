@@ -4,6 +4,13 @@ import { Op } from 'sequelize';
 import { Router } from 'express';
 const router = Router();
 
+const passwordRegex =
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+const passwordError = new Error(
+  'Password must be at least 8 characters, contain uppercase + lowercase letters, a number, and a symbol.'
+);
+const confirmPasswordError = new Error('Passwords must match');
+
 /* POST */
 
 router.post('/', (req, res, next) => {
@@ -12,12 +19,22 @@ router.post('/', (req, res, next) => {
   const reqSchema = Joi.object({
     username: Joi.string().max(15).required(),
     email: Joi.string().email().required(),
-    password: Joi.string().min(8).max(60).required(),
-    confirmPassword: Joi.string().min(8).max(60).required(),
+    password: Joi.string()
+      .min(8)
+      .max(60)
+      .regex(passwordRegex)
+      .error(passwordError)
+      .required(),
+    confirmPassword: Joi.string()
+      .min(8)
+      .max(60)
+      .ref('password')
+      .error(confirmPasswordError)
+      .required(),
   });
 
   const respSchema = Joi.object({
-    id: Joi.number().integer().min(1).strict(),
+    id: Joi.number().integer().min(1).strict().required(),
     username: Joi.string().max(15).required(),
     email: Joi.string().email().required(),
   });
