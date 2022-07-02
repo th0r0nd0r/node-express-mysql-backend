@@ -1,7 +1,8 @@
 import Joi from 'joi';
-import UserModel from '../../models/User.js';
+import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 import { Router } from 'express';
+import UserModel from '../../models/User.js';
 const router = Router();
 
 const passwordRegex =
@@ -61,14 +62,22 @@ router.post('/', (req, res, next) => {
           return res.status(409).json('Email already exists');
         }
       } else {
-        UserModel.create({ username, email, password }).then((newUser) => {
-          const { id, username, email } = newUser;
-          const resp = { id, username, email };
+        bcrypt.hash(password, 10, (err, hash) => {
+          if (err) {
+            return res.status(500).json('An error occurred');
+          }
 
-          const { value, error } = respSchema.validate(resp);
-          if (error) return res.status(500).json(error);
+          UserModel.create({ username, email, password: hash }).then(
+            (newUser) => {
+              const { id, username, email } = newUser;
+              const resp = { id, username, email };
 
-          return res.status(201).json(value);
+              const { value, error } = respSchema.validate(resp);
+              if (error) return res.status(500).json(error);
+
+              return res.status(201).json(value);
+            }
+          );
         });
       }
     }

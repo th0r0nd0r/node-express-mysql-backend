@@ -1,7 +1,5 @@
 // Setting up the Backend
-// - fix missing columns in Session model
 // - set up User model
-// - make sure models are instantiated + tables look as they should
 // - define what routes will be used
 // - create routes
 // - make controllers for each route
@@ -15,10 +13,11 @@
 
 
 
-
 // Pre - production deployment
 // - add authentication
 // - reconfigure CORS once app is deployed
+// - rate-limit authentication attempts + lock out after failed attempts
+// - use https
 
 // Performance enhancements
 // - cache static files for production https://expressjs.com/en/advanced/best-practice-performance.html#use-a-reverse-proxy
