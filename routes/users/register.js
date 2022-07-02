@@ -62,6 +62,7 @@ router.post('/', (req, res, next) => {
           return res.status(409).json('Email already exists');
         }
       } else {
+        // hash passwords
         bcrypt.hash(password, 10, (err, hash) => {
           if (err) {
             return res.status(500).json('An error occurred');

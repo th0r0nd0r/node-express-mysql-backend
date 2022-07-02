@@ -1,7 +1,7 @@
 // using import instead of require by setting "type": "module" in package.json
 import express from 'express';
 import cors from 'cors';
-import database, { initialize } from './setup/database.js';
+import session from 'express-session';
 import initializeDatabase from './setup/models.js';
 import setUpRoutes from './setup/routes.js';
 // const router = require("./routes");
@@ -19,10 +19,13 @@ const corsOptions = {
   origin: 'https://localhost:8081',
 };
 app.use(cors(corsOptions));
+
 // JSON parsing
 app.use(express.json());
+
 // sets the default dir from which to serve static assets
 app.use(express.static('public'));
+
 // converts form data to JSON?
 app.use(
   express.urlencoded({
@@ -30,6 +33,16 @@ app.use(
     limit: '64mb',
   })
 );
+
+// enables sessions for user authorization
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 // adds all route modules to app
 setUpRoutes(app);
 
