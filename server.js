@@ -10,7 +10,7 @@ import setUpRoutes from './setup/routes.js';
 
 // initialize app + set server port
 const app = express();
-const port = process.env.PORT;
+const { PORT: port, SESSION_SECRETS: session_secrets, NODE_ENV } = process.env;
 
 // Middleware
 
@@ -37,9 +37,9 @@ app.use(
 // enables sessions for user authorization
 app.use(
   session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
+    secret: session_secrets, // used to salt sessions
+    resave: false, // set to true if store does not implement touch() method
+    saveUninitialized: false, // saves anonymous sessions when set to true
   })
 );
 
