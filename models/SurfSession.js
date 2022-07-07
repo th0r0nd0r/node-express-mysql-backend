@@ -11,7 +11,7 @@ const forecastSources = [
 ];
 const tidePhases = ['low', 'high', 'mid-rising', 'mid-falling'];
 
-const Session = database.define('session', {
+const SurfSession = database.define('surf_session', {
   notes: {
     type: Sequelize.TEXT,
     validate: {
@@ -143,4 +143,4 @@ const Session = database.define('session', {
   },
 });
 
-export default Session;
+export default SurfSession;

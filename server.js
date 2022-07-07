@@ -54,6 +54,7 @@ app.use(
     secret: session_secrets, // used to salt sessions
     store: new SequelizeStore({
       db: database,
+      expiration: 7 * 24 * 60 * 60 * 1000,
     }),
     resave: false, // set to true if store does not implement touch() method
     saveUninitialized: false, // saves anonymous sessions when set to true

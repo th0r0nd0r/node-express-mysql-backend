@@ -1,18 +1,18 @@
 import models from '../models/index.js';
-const { Session, Spot, User } = models;
+const { SurfSession, Spot, User } = models;
 import { initialize as initializeDatabase } from './database.js';
 
 // User
 
-User.hasMany(Session, { foreignKey: { allowNull: false } });
+User.hasMany(SurfSession, { foreignKey: { allowNull: false } });
 
-// Session
+// SurfSession
 
-Session.belongsTo(User);
-Session.belongsTo(Spot);
+SurfSession.belongsTo(User);
+SurfSession.belongsTo(Spot);
 
 // Spot
 
-Spot.hasMany(Session, { foreignKey: { allowNull: false } });
+Spot.hasMany(SurfSession, { foreignKey: { allowNull: false } });
 
 export default initializeDatabase;
