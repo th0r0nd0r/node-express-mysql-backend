@@ -18,6 +18,7 @@
 // - reconfigure CORS once app is deployed
 // - rate-limit authentication attempts + lock out after failed attempts
 // - use https
+// - set secure: true in express-session init to use https
 
 // Performance enhancements
 // - cache static files for production https://expressjs.com/en/advanced/best-practice-performance.html#use-a-reverse-proxy
