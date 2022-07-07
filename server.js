@@ -5,9 +5,11 @@ import cors from 'cors';
 // Authentication packages
 import session from 'express-session';
 import passport from 'passport';
+import initializeSessionStore from 'connect-session-sequelize';
 
 import initializeDatabase from './setup/models.js';
 import setUpRoutes from './setup/routes.js';
+import database from './setup/database.js';
 // const router = require("./routes");
 // const AppError = require("./utils/appError");
 // const errorHandler = require("./utils/errorHandler");
@@ -45,9 +47,14 @@ app.use(
 
 // enables sessions for user authorization
 
+const SequelizeStore = initializeSessionStore(session.Store);
+
 app.use(
   session({
     secret: session_secrets, // used to salt sessions
+    store: new SequelizeStore({
+      db: database,
+    }),
     resave: false, // set to true if store does not implement touch() method
     saveUninitialized: false, // saves anonymous sessions when set to true
     // cookie: { secure: true } // secure MUST be set to true for https connections
