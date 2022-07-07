@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import bcrypt from 'bcrypt';
+import passport from 'passport';
 import { Op } from 'sequelize';
 import { Router } from 'express';
 import UserModel from '../../models/User.js';
@@ -68,21 +69,42 @@ router.post('/', (req, res, next) => {
             return res.status(500).json('An error occurred');
           }
 
-          UserModel.create({ username, email, password: hash }).then(
-            (newUser) => {
-              const { id, username, email } = newUser;
-              const resp = { id, username, email };
+          UserModel.create({ username, email, password: hash })
+            .then((newUser) => {
+              // login comes from passport.js
+              req.login(newUser, (err) => {
+                const { id, username, email } = newUser;
+                const resp = { id, username, email };
 
-              const { value, error } = respSchema.validate(resp);
-              if (error) return res.status(500).json(error);
+                if (err) {
+                  return res.status(500).json('An error occurred');
+                }
 
-              return res.status(201).json(value);
-            }
-          );
+                const { value, error } = respSchema.validate(resp);
+                if (error) return res.status(500).json(error);
+
+                return res.status(201).json(value);
+              });
+            })
+            .catch((err) => {
+              return res.status(500).json('An error occurred');
+            });
         });
       }
     }
   );
+});
+
+passport.serializeUser((user, cb) => {
+  process.nextTick(function () {
+    cb(null, { id: user.id, username: user.username });
+  });
+});
+
+passport.deserializeUser((user, cb) => {
+  process.nextTick(function () {
+    return cb(null, user);
+  });
 });
 
 export default router;
